@@ -1,0 +1,46 @@
+﻿<Window x:Class="UebungSavePatient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UebungSavePatient"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Menu Background="Gray" Margin="0,0,0,394">
+            <MenuItem Header="File">
+                <MenuItem Header="Open" Click="MenuItem_Click_1"></MenuItem>
+                <MenuItem Header="Save" Click="MenuItem_Click"></MenuItem>
+            </MenuItem>
+
+        </Menu>
+        <Label Content="Firstname" HorizontalAlignment="Left" Margin="34,64,0,0" VerticalAlignment="Top"/>
+        <Label Content="Lastname" HorizontalAlignment="Left" Margin="34,95,0,0" VerticalAlignment="Top"/>
+        <Label Content="Birthday" HorizontalAlignment="Left" Margin="34,126,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="firstnametb" HorizontalAlignment="Left" Margin="130,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="lastnametb" HorizontalAlignment="Left" Margin="130,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <DatePicker x:Name="birthdaydtp" HorizontalAlignment="Left" Margin="130,128,0,0" VerticalAlignment="Top"/>
+
+        <GroupBox Header="Gender" Margin="130,174,517,150">
+            <Grid>
+
+               
+                    <RadioButton x:Name="femaleradiobox" Content="Female" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top"/>
+                
+                <RadioButton x:Name="maleradiobox" Content="Male" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.334,0.353"/>
+
+            </Grid>
+        </GroupBox>
+        <CheckBox x:Name="bedwettercheckbox" Content="Bed wetter" HorizontalAlignment="Left" Margin="130,307,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
+        <ListBox x:Name="listboxpatient" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="435,72,188,131"/>
+        <Button Content="Delete Patient" HorizontalAlignment="Left" Margin="445,319,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button Click="Button_Click_PushToList"  HorizontalAlignment="Left" Margin="326,159,0,0" VerticalAlignment="Top">
+            <Button.Content>
+                <Image Source="/pfeil.png" Height="71" Width="76"></Image>
+            </Button.Content>
+        </Button>
+
+
+
+    </Grid>
+</Window>
