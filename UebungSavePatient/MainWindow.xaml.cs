@@ -47,6 +47,7 @@ namespace UebungSavePatient
 
             //Patients = new List<Patient>();
             listbox = listboxpatient;
+            
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
@@ -144,5 +145,25 @@ namespace UebungSavePatient
                 }
             }
             }
+
+        private void listboxpatient_Selected(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show($"An error occurred while reading the CSV file: ");
+
         }
+
+        private void listboxpatient_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(listbox.SelectedItem != null)
+            {
+                string value = listbox.SelectedItem.ToString();
+                if (Patient.TryParse(value, out Patient p))
+                {
+                    lastnametb.Text = p.Lastname;
+                    firstnametb.Text = p.Firstname;
+                    
+                }
+            }
+        }
+    }
 }
