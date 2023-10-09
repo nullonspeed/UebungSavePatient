@@ -11,7 +11,7 @@ namespace UebungSavePatient
     {
         public string Firstname { get; set; }
         public string Lastname { get; set; }
-        public DateOnly Birthday { get; set; }
+        public DateTime Birthday { get; set; }
         public bool isMale { get; set; }
         public bool isBedwetter { get; set; }
 
@@ -41,11 +41,20 @@ namespace UebungSavePatient
             int counter = 0;
             foreach (var d in Diseases)
             {
-                if
-                diseases += d + ", ";
+                counter++;
+                if (counter==Diseases.Count)
+                {
+                    diseases += d ;
+                }
+                else
+                {
+                    diseases += d + ", ";
+                }
+                
+                
             }
 
-            return $"{Firstname} {Lastname} {Birthday} [{gender}] - {bedwettertext} {{{diseases}}}";
+            return $"{Firstname} {Lastname} {Birthday} [{gender}] - {bedwettertext} "+"{"+  diseases +"}";
         }
 
         public static bool TryParse(string s, out Patient p)
@@ -64,7 +73,7 @@ namespace UebungSavePatient
                     int month = int.Parse(dateParts[1]);
                     int year = int.Parse(dateParts[2]); 
                     
-                    p.Birthday = new DateOnly(year, month, day);
+                    p.Birthday = new DateTime(year, month, day);
 
                     string gender = parts[3].Trim('[', ']');
                     if (gender == "Male")

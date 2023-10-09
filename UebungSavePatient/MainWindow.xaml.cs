@@ -48,7 +48,18 @@ namespace UebungSavePatient
             comboBox = Diseases;
             //Patients = new List<Patient>();
             listbox = listboxpatient;
-            
+
+            Patient p1 = new Patient() {Birthday = DateTime.Now, Firstname ="fn1", isBedwetter=true, Lastname ="nn" , isMale = false};
+            Patient p2 = new Patient() { Birthday = DateTime.Now, Firstname = "fn2", isBedwetter = true, Lastname = "nn1", isMale = false };
+            Patient p3 = new Patient() { Birthday = DateTime.Now, Firstname = "fn3", isBedwetter = true, Lastname = "nn2", isMale = false };
+
+
+            listbox.Items.Add(p1);
+            listbox.Items.Add(p2);
+            listbox.Items.Add(p3);
+
+
+
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
@@ -78,11 +89,11 @@ namespace UebungSavePatient
             else
             {
                
-                DateOnly date = new DateOnly(dateTime.Value.Year, dateTime.Value.Month, dateTime.Value.Day);
+               // DateOnly date = new DateOnly(dateTime.Value.Year, dateTime.Value.Month, dateTime.Value.Day);
                Patient patient = new Patient();
                 patient.Firstname = FirstName.Text;
                 patient.Lastname = LastName.Text;
-                patient.Birthday = date;
+                patient.Birthday = (DateTime)birthdaydtp.SelectedDate;
                 if(Male.IsChecked==true){
                 patient.isMale = true;
                 }
@@ -163,7 +174,7 @@ namespace UebungSavePatient
                 {
                     lastnametb.Text = p.Lastname;
                     firstnametb.Text = p.Firstname;
-                    DateTime dt = p.Birthday.ToDateTime(new TimeOnly());
+                    DateTime dt = p.Birthday;
                     birthdaydtp.SelectedDate = dt;
                     cb.IsChecked = p.isBedwetter;
                     if(p.isMale)
@@ -182,9 +193,15 @@ namespace UebungSavePatient
 
         private void addDiseadse_Click(object sender, RoutedEventArgs e)
         {
-            Patient p = (Patient)listbox.SelectedItem;
+            if (listbox.SelectedItem != null)
+            {
+                Patient p = (Patient)listbox.SelectedItem;
 
-            p.Diseases.Add((string)Diseases.SelectedItem);
+                p.Diseases.Add(Diseases.SelectedItem.ToString());
+
+                    listbox.SelectedItem = p;
+            }
+           
         }
     }
 }
