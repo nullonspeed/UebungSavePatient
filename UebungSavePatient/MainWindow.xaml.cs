@@ -72,7 +72,7 @@ namespace UebungSavePatient
         private void Button_Click_PushToList(object sender, RoutedEventArgs e)
         {
             DateTime? dateTime = birthdaydtp.SelectedDate;
-            if (FirstName == null || LastName==null || Male.IsChecked ==false &&Female.IsChecked==false || dateTime ==null){
+            if (FirstName.Text == null || FirstName.Text == "" || LastName.Text == "" || LastName==null || Male.IsChecked ==false &&Female.IsChecked==false || dateTime ==null){
                 MessageBox.Show("Please fill out the values");
             }
             else
@@ -128,6 +128,7 @@ namespace UebungSavePatient
                 try
                 {
                     string[] lines = File.ReadAllLines(filePath);
+                    listbox.Items.Clear();
                     foreach (string line in lines)
                     {
                         if (Patient.TryParse(line, out Patient p))
@@ -162,7 +163,19 @@ namespace UebungSavePatient
                 {
                     lastnametb.Text = p.Lastname;
                     firstnametb.Text = p.Firstname;
-                    
+                    DateTime dt = p.Birthday.ToDateTime(new TimeOnly());
+                    birthdaydtp.SelectedDate = dt;
+                    cb.IsChecked = p.isBedwetter;
+                    if(p.isMale)
+                    {
+                        Male.IsChecked = true;
+                    }
+                    else
+                    {
+                        Female.IsChecked = true;
+                    }
+                   
+
                 }
             }
         }

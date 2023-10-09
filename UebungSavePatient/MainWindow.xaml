@@ -34,8 +34,8 @@
 
             </Grid>
         </GroupBox>
-        <CheckBox x:Name="bedwettercheckbox" Content="Bed wetter" HorizontalAlignment="Left" Margin="41,378,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
-        <ListBox x:Name="listboxpatient" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="435,72,188,131" SelectionMode="Single" SelectionChanged="listboxpatient_SelectionChanged" />
+        <CheckBox x:Name="bedwettercheckbox" Content="Bed wetter" HorizontalAlignment="Left" Margin="130,307,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
+        <ListBox x:Name="listboxpatient" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="435,72,153,136" SelectionMode="Single" SelectionChanged="listboxpatient_SelectionChanged" />
         <Button Content="Delete Patient" HorizontalAlignment="Left" Margin="445,319,0,0" VerticalAlignment="Top" Click="Button_Click"/>
         <Button Click="Button_Click_PushToList"  HorizontalAlignment="Left" Margin="271,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.625,0.48">
             <Button.Content>
