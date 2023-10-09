@@ -31,6 +31,7 @@ namespace UebungSavePatient
         RadioButton Male;
         RadioButton Female;
         CheckBox cb;
+        ComboBox comboBox;
 
         //List<Patient> Patients;
 
@@ -44,7 +45,7 @@ namespace UebungSavePatient
             Male = maleradiobox;
             Female = femaleradiobox;
             cb = bedwettercheckbox;
-
+            comboBox = Diseases;
             //Patients = new List<Patient>();
             listbox = listboxpatient;
             
@@ -90,7 +91,7 @@ namespace UebungSavePatient
                     patient.isMale = false;
                 }
                 patient.isBedwetter=cb.IsChecked ==true;
-                listbox.Items.Add(patient.ToString());
+                listbox.Items.Add(patient);
                // Patients.Add(patient);
                 
             }
@@ -132,7 +133,7 @@ namespace UebungSavePatient
                         if (Patient.TryParse(line, out Patient p))
                         {
                            // Patients.Add(p);
-                            listbox.Items.Add(p.ToString());
+                            listbox.Items.Add(p);
                         }
                     }
                     
@@ -164,6 +165,13 @@ namespace UebungSavePatient
                     
                 }
             }
+        }
+
+        private void addDiseadse_Click(object sender, RoutedEventArgs e)
+        {
+            Patient p = (Patient)listbox.SelectedItem;
+
+            p.Diseases.Add((string)Diseases.SelectedItem);
         }
     }
 }

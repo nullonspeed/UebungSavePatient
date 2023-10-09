@@ -15,6 +15,8 @@ namespace UebungSavePatient
         public bool isMale { get; set; }
         public bool isBedwetter { get; set; }
 
+        public List<string> Diseases { get; set; } = new List<string>();
+
         public override string? ToString()
         {
             string gender = "";
@@ -35,8 +37,15 @@ namespace UebungSavePatient
             {
                 bedwettertext = "No bedwetter";
             }
+            string diseases ="";
+            int counter = 0;
+            foreach (var d in Diseases)
+            {
+                if
+                diseases += d + ", ";
+            }
 
-            return $"{Firstname} {Lastname} {Birthday} [{gender}] - {bedwettertext}";
+            return $"{Firstname} {Lastname} {Birthday} [{gender}] - {bedwettertext} {{{diseases}}}";
         }
 
         public static bool TryParse(string s, out Patient p)

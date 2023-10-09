@@ -16,29 +16,39 @@
         </Menu>
         <Label Content="Firstname" HorizontalAlignment="Left" Margin="34,64,0,0" VerticalAlignment="Top"/>
         <Label Content="Lastname" HorizontalAlignment="Left" Margin="34,95,0,0" VerticalAlignment="Top"/>
-        <Label Content="Birthday" HorizontalAlignment="Left" Margin="34,126,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="firstnametb" HorizontalAlignment="Left" Margin="130,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="lastnametb" HorizontalAlignment="Left" Margin="130,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <DatePicker x:Name="birthdaydtp" HorizontalAlignment="Left" Margin="130,128,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="birthdaydtp" HorizontalAlignment="Left" Margin="41,180,0,0" VerticalAlignment="Top"/>
 
-        <GroupBox Header="Gender" Margin="130,174,517,150">
+        <GroupBox Header="Gender" Margin="41,263,606,61">
             <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
-               
-                    <RadioButton x:Name="femaleradiobox" Content="Female" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top"/>
-                
-                <RadioButton x:Name="maleradiobox" Content="Male" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.334,0.353"/>
+
+                <RadioButton x:Name="femaleradiobox" Content="Female" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+
+                <RadioButton x:Name="maleradiobox" Content="Male" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.334,0.353" Grid.ColumnSpan="2"/>
 
             </Grid>
         </GroupBox>
-        <CheckBox x:Name="bedwettercheckbox" Content="Bed wetter" HorizontalAlignment="Left" Margin="130,307,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
+        <CheckBox x:Name="bedwettercheckbox" Content="Bed wetter" HorizontalAlignment="Left" Margin="41,378,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
         <ListBox x:Name="listboxpatient" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="435,72,188,131" SelectionMode="Single" SelectionChanged="listboxpatient_SelectionChanged" />
         <Button Content="Delete Patient" HorizontalAlignment="Left" Margin="445,319,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <Button Click="Button_Click_PushToList"  HorizontalAlignment="Left" Margin="326,159,0,0" VerticalAlignment="Top">
+        <Button Click="Button_Click_PushToList"  HorizontalAlignment="Left" Margin="271,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.625,0.48">
             <Button.Content>
                 <Image Source="/pfeil.png" Height="71" Width="76"></Image>
             </Button.Content>
         </Button>
+        <ComboBox x:Name="Diseases" HorizontalAlignment="Left" Margin="45,233,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem Content="Broken Leg"/>
+            <ComboBoxItem Content="Broken Arm"/>
+            <ComboBoxItem Content="Broken Nose"/>
+            <ComboBoxItem Content="feels dizzy" IsSelected="True"/>
+        </ComboBox>
+        <Button x:Name="addDiseadse" Content="Add Diesease" HorizontalAlignment="Left" Margin="174,235,0,0" VerticalAlignment="Top" Click="addDiseadse_Click"/>
 
 
 
