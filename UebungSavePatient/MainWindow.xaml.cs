@@ -2,6 +2,8 @@
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -32,6 +34,8 @@ namespace UebungSavePatient
         RadioButton Female;
         CheckBox cb;
         ComboBox comboBox;
+        // public ObservableCollection<Patient> PatientList { get; set; } = new ObservableCollection<Patient>();
+        StackPanel stackPanel;
 
         //List<Patient> Patients;
 
@@ -48,15 +52,15 @@ namespace UebungSavePatient
             comboBox = Diseases;
             //Patients = new List<Patient>();
             listbox = listboxpatient;
+            stackPanel = panelOne;
+            //Patient p1 = new Patient() {Birthday = DateTime.Now, Firstname ="fn1", isBedwetter=true, Lastname ="nn" , isMale = false};
+            //Patient p2 = new Patient() { Birthday = DateTime.Now, Firstname = "fn2", isBedwetter = true, Lastname = "nn1", isMale = false };
+            //Patient p3 = new Patient() { Birthday = DateTime.Now, Firstname = "fn3", isBedwetter = true, Lastname = "nn2", isMale = false };
 
-            Patient p1 = new Patient() {Birthday = DateTime.Now, Firstname ="fn1", isBedwetter=true, Lastname ="nn" , isMale = false};
-            Patient p2 = new Patient() { Birthday = DateTime.Now, Firstname = "fn2", isBedwetter = true, Lastname = "nn1", isMale = false };
-            Patient p3 = new Patient() { Birthday = DateTime.Now, Firstname = "fn3", isBedwetter = true, Lastname = "nn2", isMale = false };
 
-
-            listbox.Items.Add(p1);
-            listbox.Items.Add(p2);
-            listbox.Items.Add(p3);
+            //listbox.Items.Add(p1);
+            //listbox.Items.Add(p2);
+            //listbox.Items.Add(p3);
 
 
 
@@ -71,8 +75,10 @@ namespace UebungSavePatient
         {
             if(listbox.SelectedItem != null)
             {
-               // Patients.Remove(Patients.Find(x=> x.ToString()==listbox.SelectedItem.ToString()));
+                // Patients.Remove(Patients.Find(x=> x.ToString()==listbox.SelectedItem.ToString()));
+                stackPanel.Children.RemoveAt(listbox.SelectedIndex);
                 listbox.Items.Remove(listbox.SelectedItem);
+                
             }
 
 
@@ -102,6 +108,12 @@ namespace UebungSavePatient
                     patient.isMale = false;
                 }
                 patient.isBedwetter=cb.IsChecked ==true;
+                Label personLabel = new Label();
+                
+                personLabel.Background =Brushes.Red;
+                personLabel.Content = $"{patient.Firstname} {patient.Lastname}";
+                personLabel.Margin = new Thickness(0, 5, 0, 5);
+                stackPanel.Children.Add(personLabel);
                 listbox.Items.Add(patient);
                // Patients.Add(patient);
                 
@@ -113,7 +125,8 @@ namespace UebungSavePatient
             string line = "";
             foreach(var item in listbox.Items)
             {
-                line += item.ToString()+"\n";
+                Patient p = (Patient)item;
+                line += p.ToCSV()+"\n";
 
             }
             SaveFileDialog sFD = new SaveFileDialog();
@@ -133,6 +146,7 @@ namespace UebungSavePatient
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "CSV Files (*.csv)|*.csv";
+            int logcounter = 0;
             if (openFileDialog.ShowDialog() == true)
             {
                 string filePath = openFileDialog.FileName;
@@ -140,17 +154,32 @@ namespace UebungSavePatient
                 {
                     string[] lines = File.ReadAllLines(filePath);
                     listbox.Items.Clear();
+                    stackPanel.Children.Clear();
                     foreach (string line in lines)
                     {
                         if (Patient.TryParse(line, out Patient p))
                         {
-                           // Patients.Add(p);
+                            // Patients.Add(p);
+                            Label personLabel = new Label();
+
+                            personLabel.Background = Brushes.Red;
+                            personLabel.Content = $"{p.Firstname} {p.Lastname}";
+                            personLabel.Margin = new Thickness(0, 5, 0, 5);
+                            stackPanel.Children.Add(personLabel);
                             listbox.Items.Add(p);
+                            
+                        }
+                        else
+                        {
+                            logcounter++;
                         }
                     }
                     
                     Console.WriteLine(lines);
-
+                    if (logcounter!=0)
+                    {
+                        MessageBox.Show(logcounter+" lines are Depricated, please check the file the layout does not match");
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -169,9 +198,8 @@ namespace UebungSavePatient
         {
             if(listbox.SelectedItem != null)
             {
-                string value = listbox.SelectedItem.ToString();
-                if (Patient.TryParse(value, out Patient p))
-                {
+                Patient p = (Patient)listbox.SelectedItem;
+               
                     lastnametb.Text = p.Lastname;
                     firstnametb.Text = p.Firstname;
                     DateTime dt = p.Birthday;
@@ -187,7 +215,7 @@ namespace UebungSavePatient
                     }
                    
 
-                }
+                
             }
         }
 
@@ -197,11 +225,18 @@ namespace UebungSavePatient
             {
                 Patient p = (Patient)listbox.SelectedItem;
 
-                p.Diseases.Add(Diseases.SelectedItem.ToString());
+                p.Diseases.Add(Diseases.Text);
 
                     listbox.SelectedItem = p;
+                listbox.Items.Refresh();
             }
            
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            listbox.Items.Clear();
+            stackPanel.Children.Clear();
         }
     }
 }

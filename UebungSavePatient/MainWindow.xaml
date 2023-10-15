@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UebungSavePatient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Menu Background="Gray" Margin="0,0,0,394">
+        Title="MainWindow" Height="450" Width="1000">
+    <Grid HorizontalAlignment="Left" Width="1155">
+        <Menu Background="Gray" Margin="0,0,157,394">
             <MenuItem Header="File">
                 <MenuItem Header="Open" Click="MenuItem_Click_1"></MenuItem>
                 <MenuItem Header="Save" Click="MenuItem_Click"></MenuItem>
@@ -20,11 +20,12 @@
         <TextBox x:Name="lastnametb" HorizontalAlignment="Left" Margin="130,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <DatePicker x:Name="birthdaydtp" HorizontalAlignment="Left" Margin="41,180,0,0" VerticalAlignment="Top"/>
 
-        <GroupBox Header="Gender" Margin="41,263,606,61">
-            <Grid>
+        <GroupBox Header="Gender" Margin="41,263,985,61">
+            <Grid Margin="0,0,-12,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="203*"/>
+                    <ColumnDefinition Width="33*"/>
                 </Grid.ColumnDefinitions>
 
 
@@ -35,8 +36,16 @@
             </Grid>
         </GroupBox>
         <CheckBox x:Name="bedwettercheckbox" Content="Bed wetter" HorizontalAlignment="Left" Margin="45,389,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
-        <ListBox x:Name="listboxpatient" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="435,72,153,136" SelectionMode="Single" SelectionChanged="listboxpatient_SelectionChanged" />
-        <Button Content="Delete Patient" HorizontalAlignment="Left" Margin="445,319,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <ListBox x:Name="listboxpatient"  Margin="401,112,532,96" SelectionMode="Single" SelectionChanged="listboxpatient_SelectionChanged" />
+
+        <!--<ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding PatientList}"></TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>-->
+
+
+        <Button Content="Delete Patient" HorizontalAlignment="Left" Margin="190,353,0,0" VerticalAlignment="Top" Click="Button_Click"/>
         <Button Click="Button_Click_PushToList"  HorizontalAlignment="Left" Margin="271,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.625,0.48">
             <Button.Content>
                 <Image Source="/pfeil.png" Height="71" Width="76"></Image>
@@ -49,6 +58,10 @@
             <ComboBoxItem Content="feels dizzy" IsSelected="True"/>
         </ComboBox>
         <Button x:Name="addDiseadse" Content="Add Diesease" HorizontalAlignment="Left" Margin="174,235,0,0" VerticalAlignment="Top" Click="addDiseadse_Click"/>
+        <GroupBox Header="List of Patients" Margin="683,81,270,61">
+            <StackPanel x:Name="panelOne" Opacity="2"/>
+        </GroupBox>
+        <Button Content="Delete All Patients" HorizontalAlignment="Left" Margin="311,353,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
 
 
 
